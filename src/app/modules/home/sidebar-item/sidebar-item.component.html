@@ -1,0 +1,6 @@
+<div *ngIf="sidebarItem"
+[ngClass]="['sidebar-item']" 
+[class.highlight]="highlight"
+(click)="onClick($event)">
+  <span>{{ sidebarItem }}</span>
+</div>

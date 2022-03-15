@@ -1,0 +1,28 @@
+<div class="wrap">
+  <h1>NGRX Store</h1>
+  <nav>
+    <ul class="menu" (click)="navigate($event)">
+      <li class="menu-item">Home</li>
+      <li class="menu-item">Users</li>
+      <li class="menu-item">Photo</li>
+      <li class="menu-item">About us</li>
+    </ul>
+  </nav>
+
+  <ng-container [ngSwitch]="isLoggedIn">
+    <div *ngSwitchCase="false" class="auth-tool">
+      <a (click)="openAuthModal('sign-in')" role="link">Sign in</a>
+      <a (click)="openAuthModal('sign-up')">Sign up</a>
+    </div>
+    <div *ngSwitchCase="true">
+      <a class="header-username" (click)="toggleDropdown()">
+        <span class="username">{{ userName }}</span>
+        <span class="arrow-down" [class.arrow-up]="dropdownVisible">></span>
+      </a>
+      <ul *ngIf="dropdownVisible" class="dropdown-menu">
+        <li (click)="settings()">Settings</li>
+        <li (click)="signOut()">Sign out</li>
+      </ul>
+    </div>
+  </ng-container>
+</div>

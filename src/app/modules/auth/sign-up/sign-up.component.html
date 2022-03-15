@@ -1,0 +1,59 @@
+<div class="sign-in-wrapper">
+  <h1>Welcome</h1>
+  <p>Please, enter your details to sidn up</p>
+  <div class="close-modal" (click)="closeModal()">&#10006;</div>
+  <form class="sign-in" [formGroup]="signUpForm" (ngSubmit)="signUn()">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      (input)="setEmailBackendError()"
+    />
+    <div class="message">
+      <small class="err-message" *ngIf="emailError">{{
+        emailError.message
+      }}</small>
+    </div>
+    <div class="input-wrap">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="password"
+        (input)="setPassBackendError()"
+      />
+      <img
+        src="../../../../assets/icons/showPassword.png"
+        alt="showPassword"
+        width="16"
+        class="show-password"
+        appShowPassword
+      />
+    </div>
+    <div class="input-wrap confirm">
+      <label for="confirm-password">Confirm password</label>
+      <input
+        type="password"
+        id="confirm-password"
+        formControlName="confirmPassword"
+        placeholder="password"
+        (input)="setPassBackendError()"
+      />
+      <img
+        src="../../../../assets/icons/showPassword.png"
+        alt="showPassword"
+        width="16"
+        class="show-password"
+        appShowPassword
+      />
+      <div class="message">
+        <small class="err-message" *ngIf="passError">{{
+          passError.message
+        }}</small>
+      </div>
+    </div>
+    <button type="submit">Sign up</button>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+<div class="profile-wrap">
+    <div class="profile-block">
+        <div class="avatar">
+            <app-avatar></app-avatar>
+        </div>
+        
+        <div class="user-info">
+            <h3 class="user-name">{{user.name + ' ' + user?.sureName}}</h3>
+            <div *ngIf="user.city" class="city">{{user.city}}</div>
+            <div *ngIf="user.education" appShowInfo [value]="user.education"></div>
+        </div>
+    </div>
+    <div class="post_block"></div>
+</div>

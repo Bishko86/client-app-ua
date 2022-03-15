@@ -1,0 +1,30 @@
+.image {
+  width: 150px;
+}
+.gallery {
+  display: inline-block;
+  margin: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 300px auto 300px;
+  justify-items: center;
+  column-gap: 50px;
+  row-gap: 50px;
+  background-color: rgb(55, 56, 58);
+  padding: 40px 50px;
+}
+
+.up {
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  transform: rotate(-90deg);
+  font-size: 20px;
+  color: rgb(54, 52, 52);
+  border: 1px solid black;
+}

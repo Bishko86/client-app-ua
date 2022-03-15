@@ -1,0 +1,18 @@
+<div class="grid" appScrollLoadData [loading]="isFetching" (scrollPage)="onScrollData($event)">
+  <div *ngFor="let img of photos$ | async" class="gallery">
+    <img
+      class="image"
+      [src]="img.thumbnailUrl"
+      alt="ss"
+      (click)="showPhoto(img)"
+    />
+  </div>
+  <ng-container *ngIf="loading$ | async">
+    <div></div>
+    <app-loader></app-loader>
+    <div></div>
+  </ng-container>
+</div>
+<button *ngIf="showUpBtn" class="up" (click)="onScrollTop()">&#10148;</button>
+<app-show-image *ngIf="showImgModal" [url]="url" (closeModal)="onCloseModal()">
+</app-show-image>

@@ -1,0 +1,11 @@
+<div class="error" *ngIf="isError.isError; else list">
+    {{ isError.error?.message }}
+  </div>
+  <ng-template #list>
+    <ul>
+      <li *ngFor="let user of users$ | async" class="item">
+        <span (click)="onUserInfo(user.id)">{{ user.name }}</span>
+      </li>
+    </ul>
+  </ng-template>
+  <button (click)="load()">load</button>

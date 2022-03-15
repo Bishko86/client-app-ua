@@ -1,0 +1,31 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.image {
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  background: #fff;
+}
+
+.close {
+  position: absolute;
+  cursor: pointer;
+  top: 2px;
+  right: 4px;
+}
+
+.wrap {
+  position: relative;
+}

@@ -1,0 +1,65 @@
+.error {
+  color: red;
+  font-size: 24px;
+  font-weight: 600;
+}
+nav .menu {
+  list-style: none;
+  display: flex;
+  margin-left: 160px;
+}
+.menu-item {
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 18px;
+  color: rgb(63, 62, 62);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+.auth-tool {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+}
+.header-username {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.username {
+  margin-right: 5px;
+  color: green;
+}
+.arrow-down {
+  transform: rotate(90deg);
+  transition: 0.4s ease-out;
+  transition-delay: 0.1s;
+}
+.arrow-up {
+  transform: rotate(-90deg);
+  transition: 0.4s ease-out;
+  transition-delay: 0;
+}
+.dropdown-menu {
+  list-style: none;
+  position: absolute;
+  top: 25px;
+  right: 12px;
+  background-color: rgb(201, 209, 209);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.dropdown-menu li {
+  padding: 5px 10px 15px;
+}

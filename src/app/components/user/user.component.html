@@ -1,0 +1,24 @@
+<div
+  *ngIf="{
+    user: user$ | async
+  } as obs"
+>
+  <div [ngClass]="obs.user ? 'styleName' : 'noName'">
+    {{ obs.user ? obs.user.name : "No data" }}
+  </div>
+  <ul *ngIf="obs.user">
+    <li>name: {{ obs.user.name }}</li>
+    <li>phone: {{ obs.user.phone }}</li>
+    <li>username: {{ obs.user.username }}</li>
+    <li>website: {{ obs.user.website }}</li>
+  </ul>
+</div>
+
+<pre>
+  {{ currentRoute$ | async | json }}
+
+Router-Params-ID
+  {{ selectRouteNestedParams$  | async | json}}
+RouteParams
+{{ selectRouteParams$ | async | json }}
+</pre>

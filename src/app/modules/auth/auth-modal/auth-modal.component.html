@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="authPage">
+    <app-sign-in *ngSwitchCase="'sign-in'"></app-sign-in>
+    <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
+</ng-container>

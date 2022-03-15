@@ -1,0 +1,5 @@
+.app-wrapper {
+  height: calc(100vh - 6em);
+  padding: 12px;
+  font-family: "Open Sans", sans-serif;
+}
