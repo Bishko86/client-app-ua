@@ -5,9 +5,9 @@ import { of } from "rxjs";
 import { switchMap, withLatestFrom } from "rxjs/operators";
 import { IPhoto } from "src/app/classes/photo.inteface";
 import { PhotoService } from "src/app/services/photo.service";
-import { EPhotoActions, GetPhotos, GetPhotosSuccess, PhotoIsFetching } from "../actions/photo.actions";
-import { selectPhotoListlimit, selectPhotoListPage } from "../selectors/photo.selector";
-import { IAppState } from "../states/app.state";
+import { EPhotoActions, GetPhotos, GetPhotosSuccess, PhotoIsFetching } from "./photo.actions";
+import { selectPhotoListlimit, selectPhotoListPage } from "./photo.selector";
+import { IAppState } from "../../../store/states/app.state";
 
 @Injectable()
 export class PhotoEffects {

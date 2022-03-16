@@ -9,7 +9,7 @@ export const selectAuthIsFetching = createSelector(
   (state: IAuthState) => state.isFetching
 );
 
-export const selectAuthIsLoggedIn = createSelector(
+export const selectUserIsLoggedIn = createSelector(
   selectAuth,
   (state: IAuthState) => state.isLoggedIn
 );

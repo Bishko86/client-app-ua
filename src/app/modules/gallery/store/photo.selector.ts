@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
-import { IAppState } from "../states/app.state";
-import { IPhotoState } from "../states/photo.state";
+import { IAppState } from "../../../store/states/app.state";
+import { IPhotoState } from "./photo.state";
 
 const selectPhotos = (state: IAppState) => state.photos;
 

@@ -1,5 +1,5 @@
-import { initialPhotoState, IPhotoState } from "../states/photo.state";
-import { EPhotoActions, PhotosAction } from "../actions/photo.actions"
+import { initialPhotoState, IPhotoState } from "./photo.state";
+import { EPhotoActions, PhotosAction } from "./photo.actions"
 
 export const photosReducer = (
     state = initialPhotoState,

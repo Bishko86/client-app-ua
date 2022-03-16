@@ -13,13 +13,9 @@ import { UserService } from './services/user.service';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserComponent } from './components/user/user.component';
 import { RouterModule, Routes } from '@angular/router';
-import { GalleryComponent } from './components/gallery/gallery.component';
 import { PhotoService } from './services/photo.service';
-import { PhotoEffects } from './store/effects/photo.effects';
-import { ShowImageComponent } from './components/show-image/show-image.component';
+import { PhotoEffects } from './modules/gallery/store/photo.effects';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { LoaderComponent } from './common/components/loader/loader.component';
-import { ScrollLoadDataDirective } from './directives/scroll-load-data.directive';
 import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
@@ -44,7 +40,9 @@ const appRoutes: Routes = [
       baz: 789,
     },
   },
-  { path: 'photo', component: GalleryComponent },
+  { path: 'photo',
+  loadChildren: () => import('./modules/gallery/gallery.module').then((mod) => mod.GalleryModule),
+},
   { path: '**', redirectTo: '/home' },
 ];
 
@@ -53,11 +51,7 @@ const appRoutes: Routes = [
     AppComponent,
     UsersListComponent,
     UserComponent,
-    GalleryComponent,
-    LoaderComponent,
-    ShowImageComponent,
     AboutUsComponent,
-    ScrollLoadDataDirective,
     HeaderComponent,
   ],
   imports: [

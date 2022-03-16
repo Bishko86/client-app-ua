@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { AuthModalComponent } from 'src/app/modules/auth/auth-modal/auth-modal.component';
+import { AuthModalComponent } from 'src/app/modules/auth/components/auth-modal/auth-modal.component';
 import { GetUsers } from 'src/app/store/actions/user.actions';
 import { IError } from 'src/app/store/states/user.state';
 import { IAppState } from 'src/app/store/states/app.state';
 import { IUserAuth } from 'src/app/common/interfaces/auth.interface';
 import { Logout } from 'src/app/modules/auth/store/auth.actions';
+import { selectUserAuthData, selectUserIsLoggedIn } from 'src/app/modules/auth/store/auth.selector';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,9 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   userName: string;
   dropdownVisible = false;
-  accessToken: string | null = null;
   destroy$ = new Subject<boolean>();
+
+  userData$ = this.store.pipe(select(selectUserAuthData));
 
   constructor(
     private store: Store<IAppState>,
@@ -31,8 +33,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new GetUsers());
-    this.accessToken = localStorage.getItem('accessToken');
-    this.isLoggedIn = !!this.accessToken;
+    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     this.userName = localStorage.getItem('username') || '';
   }
 
@@ -69,6 +70,10 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.dropdownVisible = !this.dropdownVisible;
     this.store.dispatch(new Logout());
+    this.userData$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
+      this.userName = user.username;
+      this.isLoggedIn = !!user.accessToken;
+    })
   }
 
   settings() {

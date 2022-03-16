@@ -4,12 +4,12 @@ import { IPhoto } from 'src/app/classes/photo.inteface';
 import {
   GetPhotos,
   GetPhotosNextPage,
-} from 'src/app/store/actions/photo.actions';
+} from 'src/app/modules/gallery/store/photo.actions';
 import {
   selectPhotoIsFetching,
   selectPhotoList,
   selectPhotoListPage,
-} from 'src/app/store/selectors/photo.selector';
+} from 'src/app/modules/gallery/store/photo.selector';
 import { IAppState } from 'src/app/store/states/app.state';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

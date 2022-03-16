@@ -35,6 +35,7 @@ export const authReducer = (
     case EAuthActions.LOGOUT:
       return {
         ...state,
+        isLoggedIn: false,
         userAuthData: {
           accessToken: '',
           username: '',
