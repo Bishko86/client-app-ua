@@ -8,32 +8,33 @@ import { AuthModalComponent } from 'src/app/modules/auth/auth-modal/auth-modal.c
 import { GetConfig } from 'src/app/store/actions/config.actions';
 import { GetUsers } from 'src/app/store/actions/user.actions';
 import { selectConfig } from 'src/app/store/selectors/config.selector';
-import { IError } from 'src/app/store/state/user.state';
+import { IError } from 'src/app/store/states/user.state';
 import { IAppState } from 'src/app/store/states/app.state';
+import { IUserAuth } from 'src/app/common/interfaces/auth.interface';
+import { Logout } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   isLoggedIn = false;
   userName: string;
   dropdownVisible = false;
   accessToken: string | null = null;
-  config$ = this._store.pipe(select(selectConfig));
+  config$ = this.store.pipe(select(selectConfig));
   destroy$ = new Subject<boolean>();
   constructor(
-    private _store: Store<IAppState>,
+    private store: Store<IAppState>,
     private router: Router,
     private dialog: MatDialog
   ) {}
   isError: IError;
 
   ngOnInit(): void {
-    this._store.dispatch(new GetConfig());
-    this._store.dispatch(new GetUsers());
+    this.store.dispatch(new GetConfig());
+    this.store.dispatch(new GetUsers());
     this.accessToken = localStorage.getItem('accessToken');
     this.isLoggedIn = !!this.accessToken;
     this.userName = localStorage.getItem('username') || '';
@@ -47,22 +48,22 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl(target);
   }
   openAuthModal(page: string) {
-   const dialogRef = this.dialog.open(AuthModalComponent, {
+    const dialogRef = this.dialog.open(AuthModalComponent, {
       data: {
         page,
       },
-      autoFocus: false
+      autoFocus: false,
     });
-    dialogRef.afterClosed()
-    .pipe(
-      takeUntil(this.destroy$),
-      filter((action) => !!action),
-    ).subscribe((data: any) => {
-      console.log(data);
-      
-      this.isLoggedIn = data.isLoggedIn;
-      this.userName = data.username;
-    })
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((action) => !!action)
+      )
+      .subscribe((data: IUserAuth) => {
+        this.isLoggedIn = data.isLoggedIn;
+        this.userName = data.username;
+      });
   }
 
   toggleDropdown() {
@@ -74,11 +75,10 @@ export class HeaderComponent implements OnInit {
     this.userName = '';
     localStorage.clear();
     this.dropdownVisible = !this.dropdownVisible;
+    this.store.dispatch(new Logout());
   }
 
   settings() {
     console.log('Settings');
-    
   }
-
 }

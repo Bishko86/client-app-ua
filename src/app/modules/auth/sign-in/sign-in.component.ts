@@ -1,9 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { IAuthError } from 'src/app/classes/auth.interface';
+import { IUserAuth } from 'src/app/common/interfaces/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { EraseLoginError, Login } from 'src/app/store/actions/auth.actions';
+import {
+  selectLoginError,
+  selectAuthIsFetching,
+  selectUserAuthData,
+} from 'src/app/store/selectors/auth.selector';
+import { IAppState } from 'src/app/store/states/app.state';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 
 @Component({
@@ -13,20 +23,28 @@ import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 })
 export class SignInComponent implements OnInit, OnDestroy {
   signInForm: FormGroup;
-  passError: { message: string } | null = null;
-  emailError: { message: string } | null = null;
-  user = {
-    username: '',
-    isLoggedIn: false,
-  };
+  loginError: IAuthError | null;
+  isLoggedIn = false;
+  user: IUserAuth;
+  isFetching$ = this.store.pipe(select(selectAuthIsFetching));
+  user$ = this.store.pipe(select(selectUserAuthData));
+  passError$ = this.store.pipe(select(selectLoginError));
+  
   private destroy$ = new Subject<boolean>();
+
   constructor(
     private dialogRef: MatDialogRef<AuthModalComponent>,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<IAppState>
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.passError$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((error) => {
+        console.log('Login');
+        this.loginError = error});
   }
 
   closeModal() {
@@ -42,26 +60,26 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   signIn() {
     const { email, password } = this.signInForm.value;
-    console.log(email, password);
-    this.authService
-      .login(email, password)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (data) => {
-          this.authService.saveUserToLocalStorage(data);
-          this.user.username = data.username;
-          this.user.isLoggedIn = true;
-          this.closeModal();
-        },
-        (err) => {
-          console.log(err);
-          this.passError = err.error;
-        }
-      );
+    this.store.dispatch(new Login(email, password));
+
+    this.user$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
+      this.isLoggedIn = !!user.accessToken;
+      this.user = {
+        ...user,
+        isLoggedIn: this.isLoggedIn,
+      };
+
+      if (this.isLoggedIn) {
+        this.closeModal();
+        this.authService.saveUserToLocalStorage(this.user);
+      }
+    });
   }
 
   setBackendError() {
-    this.passError = null;
+    if (this.loginError) {
+      this.store.dispatch(new EraseLoginError());
+    }
   }
 
   ngOnDestroy(): void {

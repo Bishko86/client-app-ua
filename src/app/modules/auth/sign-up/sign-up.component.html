@@ -2,7 +2,7 @@
   <h1>Welcome</h1>
   <p>Please, enter your details to sidn up</p>
   <div class="close-modal" (click)="closeModal()">&#10006;</div>
-  <form class="sign-in" [formGroup]="signUpForm" (ngSubmit)="signUn()">
+  <form class="sign-in" [formGroup]="signUpForm" (ngSubmit)="signUp()">
     <label for="email">Email</label>
     <input
       type="email"
@@ -12,7 +12,7 @@
     />
     <div class="message">
       <small class="err-message" *ngIf="emailError">{{
-        emailError.message
+        emailError.error.message
       }}</small>
     </div>
     <div class="input-wrap">
@@ -50,7 +50,7 @@
       />
       <div class="message">
         <small class="err-message" *ngIf="passError">{{
-          passError.message
+          passError.error.message
         }}</small>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { getUsers } from 'src/app/store/actions/user.actions';
 import { selectErrorCase, selectUserList } from 'src/app/store/selectors/user.selector';
-import { IError } from 'src/app/store/state/user.state';
+import { IError } from 'src/app/store/states/user.state';
 import { IAppState } from 'src/app/store/states/app.state';
 
 @Component({
