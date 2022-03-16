@@ -2,9 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
+import { IAuthError } from 'src/app/classes/auth.interface';
+import {
+  EraseRegistrateError,
+  Registration,
+} from 'src/app/modules/auth/store/auth.actions';
+import {
+  selectRegistrateError,
+  selectRegistrateResult,
+} from 'src/app/modules/auth/store/auth.selector';
+import { IAppState } from 'src/app/store/states/app.state';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 
 @Component({
@@ -14,18 +24,23 @@ import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
-  emailError: any;
-  passError: { message: string } | null = null;
+  emailError: IAuthError | null;
+  passError: IAuthError | null;
   destroy$ = new Subject<boolean>();
+  registrateResult$ = this.store.pipe(select(selectRegistrateResult));
+  passError$ = this.store.pipe(select(selectRegistrateError));
 
   constructor(
     private dialogRef: MatDialogRef<AuthModalComponent>,
-    private authServise: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store<IAppState>
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.passError$.pipe(takeUntil(this.destroy$)).subscribe((error) => {
+      this.emailError = error;
+    });
   }
 
   closeModal() {
@@ -48,28 +63,18 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  signUn() {
+  signUp() {
     const { email, password, confirmPassword } = this.signUpForm.value;
-    console.log(email, password, confirmPassword);
     if (password === confirmPassword) {
-      this.authServise
-        .registration(email, password)
+      this.store.dispatch(new Registration(email, password));
+      this.registrateResult$
         .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          (data) => {
-            console.log(data);
+        .subscribe((result) => {
+          if (result.registrateIsSuccess) {
             this.closeModal();
-            this.openSnackBar(data.message, 'Sign up');
-          },
-          (err) => {
-            console.log(err);
-            this.emailError = err.error;
+            this.openSnackBar(result.message, 'Sign up');
           }
-        );
-    } else {
-      this.passError = {
-        message: 'Confirm your password',
-      };
+        });
     }
   }
 
@@ -81,7 +86,7 @@ export class SignUpComponent implements OnInit {
 
   setEmailBackendError() {
     if (this.emailError) {
-      this.emailError = null;
+      this.store.dispatch(new EraseRegistrateError());
     }
   }
 }

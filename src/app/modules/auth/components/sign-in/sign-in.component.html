@@ -11,9 +11,6 @@
       placeholder="example@email.com"
     />
     <div class="message">
-      <small class="err-message" *ngIf="emailError">{{
-        emailError.message
-      }}</small>
     </div>
     <div class="input-wrap">
       <label for="password">Password</label>
@@ -32,11 +29,17 @@
         appShowPassword
       />
       <div class="message">
-        <small class="err-message" *ngIf="passError">{{
-          passError.message
+        <small class="err-message" *ngIf="loginError">{{
+          loginError.error.message
         }}</small>
       </div>
     </div>
-    <button type="submit" [disabled]="!signInForm.valid">Sign in</button>
+    <button
+      type="submit"
+      [disabled]="(isFetching$ | async) || signInForm.invalid"
+    >
+      Sign in
+      {{(isFetching$ | async) || signInForm.invalid|json}}
+    </button>
   </form>
 </div>

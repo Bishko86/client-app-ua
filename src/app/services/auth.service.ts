@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-interface IUserDto {
-  username: string;
-  accessToken: string;
-  roles: string[];
-}
+import { IUserAuthorized } from '../classes/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +9,8 @@ interface IUserDto {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<IUserDto> {
-    return this.http.post<IUserDto>('/auth/login', {
+  login(username: string, password: string): Observable<IUserAuthorized> {
+    return this.http.post<IUserAuthorized>('/auth/login', {
       username,
       password,
     });
@@ -28,7 +23,7 @@ export class AuthService {
     });
   }
   
-  saveUserToLocalStorage(user: IUserDto) {
+  saveUserToLocalStorage(user: IUserAuthorized) {
     Object.entries(user).forEach(([key, value]) => {
       localStorage.setItem(key, value);
     });

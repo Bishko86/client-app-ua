@@ -29,6 +29,9 @@ nav .menu {
   justify-content: space-around;
   width: 200px;
 }
+.auth-tool a {
+  cursor: pointer;
+}
 .header-username {
   display: flex;
   align-items: center;

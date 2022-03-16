@@ -3,17 +3,19 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  baseUrl = 'http://137.184.2.106:8080';
+  apiUrl = 'http://137.184.2.106:8080';
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const apiReq = request.clone({ url: `${this.baseUrl}${request.url}` });
+  intercept( request: HttpRequest<unknown>, next: HttpHandler ): Observable<HttpEvent<unknown>> {
+    const url = request.url.includes('placeholder')
+      ? `${request.url}`
+      : `${this.apiUrl}${request.url}`;
+    const apiReq = request.clone({ url });
     return next.handle(apiReq);
-    
   }
 }
