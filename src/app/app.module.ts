@@ -28,6 +28,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthService } from './services/auth.service';
 import { ApiInterceptor } from './interceptors/api.interceptor';
+import { AuthEffects } from './store/effects/auth.effects';
 
 const appRoutes: Routes = [
   { path: 'home', 
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
     AuthModule,
     RouterModule.forRoot(appRoutes),
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([PhotoEffects, UserEffects, ConfigEffects]),
+    EffectsModule.forRoot([PhotoEffects, UserEffects, ConfigEffects, AuthEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
     BrowserAnimationsModule,
