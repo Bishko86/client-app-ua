@@ -1,5 +1,5 @@
-import { initialAuthState, IAuthState } from '../states/auth.state';
-import { AuthActions, EAuthActions } from '../actions/auth.actions';
+import { initialAuthState, IAuthState } from './auth.state';
+import { AuthActions, EAuthActions } from './auth.actions';
 
 export const authReducer = (
   state = initialAuthState,

@@ -7,12 +7,12 @@ import { takeUntil } from 'rxjs/operators';
 import { IAuthError } from 'src/app/classes/auth.interface';
 import { IUserAuth } from 'src/app/common/interfaces/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
-import { EraseLoginError, Login } from 'src/app/store/actions/auth.actions';
+import { EraseLoginError, Login } from 'src/app/modules/auth/store/auth.actions';
 import {
   selectLoginError,
   selectAuthIsFetching,
   selectUserAuthData,
-} from 'src/app/store/selectors/auth.selector';
+} from 'src/app/modules/auth/store/auth.selector';
 import { IAppState } from 'src/app/store/states/app.state';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 

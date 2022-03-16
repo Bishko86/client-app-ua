@@ -14,8 +14,8 @@ import {
   Registration,
   RegistrationFailure,
   RegistrationSuccess,
-} from '../actions/auth.actions';
-import { IAppState } from '../states/app.state';
+} from './auth.actions';
+import { IAppState } from '../../../store/states/app.state';
 
 @Injectable()
 export class AuthEffects {

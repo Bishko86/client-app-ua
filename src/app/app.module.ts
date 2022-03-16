@@ -7,11 +7,9 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/reducers/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
-import { ConfigEffects } from './store/effects/config.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserService } from './services/user.service';
-import { ConfigService } from './services/config.service';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserComponent } from './components/user/user.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -28,7 +26,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthService } from './services/auth.service';
 import { ApiInterceptor } from './interceptors/api.interceptor';
-import { AuthEffects } from './store/effects/auth.effects';
+import { AuthEffects } from './modules/auth/store/auth.effects';
 
 const appRoutes: Routes = [
   { path: 'home', 
@@ -69,14 +67,13 @@ const appRoutes: Routes = [
     AuthModule,
     RouterModule.forRoot(appRoutes),
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([PhotoEffects, UserEffects, ConfigEffects, AuthEffects]),
+    EffectsModule.forRoot([PhotoEffects, UserEffects, AuthEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
     BrowserAnimationsModule,
   ],
   providers: [
-    UserService, 
-    ConfigService, 
+    UserService,  
     PhotoService,
     AuthService, {
       provide: HTTP_INTERCEPTORS, 

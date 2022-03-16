@@ -9,11 +9,11 @@ import { IAuthError } from 'src/app/classes/auth.interface';
 import {
   EraseRegistrateError,
   Registration,
-} from 'src/app/store/actions/auth.actions';
+} from 'src/app/modules/auth/store/auth.actions';
 import {
   selectRegistrateError,
   selectRegistrateResult,
-} from 'src/app/store/selectors/auth.selector';
+} from 'src/app/modules/auth/store/auth.selector';
 import { IAppState } from 'src/app/store/states/app.state';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 
