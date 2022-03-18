@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { IAuthError, IUserLoginData } from 'src/app/classes/auth.interface';
+import { IAuthError, IUserLoginData } from 'src/app/modules/auth/store/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import {
   AuthIsFetching,
@@ -28,9 +28,9 @@ export class AuthEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType<Login>(EAuthActions.LOGIN),
-      switchMap(({ username, password }) => {
+      switchMap((action) => {
         this.store.dispatch(new AuthIsFetching(true));
-        return this.authService.login(username, password).pipe(
+        return this.authService.login(action.payload).pipe(
           map((req: IUserLoginData) => {
             this.store.dispatch(new AuthIsFetching(false));
             return new LoginSuccess(req);
@@ -47,9 +47,9 @@ export class AuthEffects {
   registartion$ = createEffect(() => {
     return this.actions$.pipe(
       ofType<Registration>(EAuthActions.REGISTRATION),
-      switchMap(({ username, password }) => {
+      switchMap((action) => {
         this.store.dispatch(new AuthIsFetching(true));
-        return this.authService.registration(username, password).pipe(
+        return this.authService.registration(action.payload).pipe(
           map((req) => {
             this.store.dispatch(new AuthIsFetching(false));
             return new RegistrationSuccess({

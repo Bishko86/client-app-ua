@@ -1,4 +1,4 @@
-import { IAuthError, IUserLoginData } from 'src/app/classes/auth.interface';
+import { IAuthError, IUserLoginData } from "./auth.interface";
 export interface IAuthState {
   isLoggedIn: boolean;
   isFetching: boolean;

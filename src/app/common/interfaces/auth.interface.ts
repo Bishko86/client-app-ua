@@ -1,4 +1,4 @@
-import { IUserLoginData } from "src/app/classes/auth.interface";
+import { IUserLoginData } from "src/app/modules/auth/store/auth.interface";
 
 export interface IAuthDialogData {
     page: 'sign-in' | 'sign-up';

@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IAuthError } from 'src/app/classes/auth.interface';
+import { IAuthError, IUserLoginCredentials } from 'src/app/modules/auth/store/auth.interface';
 import { IUserAuth } from 'src/app/common/interfaces/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { EraseLoginError, Login } from 'src/app/modules/auth/store/auth.actions';
@@ -53,14 +53,16 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   private initForm() {
     this.signInForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
   }
 
   signIn() {
-    const { email, password } = this.signInForm.value;
-    this.store.dispatch(new Login(email, password));
+    const loginData: IUserLoginCredentials = {...this.signInForm.value } 
+    
+    this.store.dispatch(new Login(loginData));
 
     this.user$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
       this.isLoggedIn = !!user.accessToken;

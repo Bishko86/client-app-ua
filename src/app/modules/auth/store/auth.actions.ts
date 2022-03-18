@@ -1,9 +1,10 @@
 import { Action } from '@ngrx/store';
 import {
   IAuthError,
+  IUserLoginCredentials,
   IUserLoginData,
   IUserRegistrated,
-} from 'src/app/classes/auth.interface';
+} from 'src/app/modules/auth/store/auth.interface';
 
 export enum EAuthActions {
   LOGOUT = '[Auth] Logout',
@@ -20,7 +21,7 @@ export enum EAuthActions {
 
 export class Login implements Action {
   public readonly type = EAuthActions.LOGIN;
-  constructor(public username: string, public password: string) {}
+  constructor(public payload: IUserLoginCredentials) {}
 }
 
 export class LoginSuccess implements Action {
@@ -35,7 +36,7 @@ export class LoginFailure implements Action {
 
 export class Registration implements Action {
   public readonly type = EAuthActions.REGISTRATION;
-  constructor(public username: string, public password: string) {}
+  constructor(public payload: IUserLoginCredentials) {}
 }
 
 export class RegistrationSuccess implements Action {

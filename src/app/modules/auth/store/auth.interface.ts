@@ -1,3 +1,10 @@
+export interface IUserLoginCredentials {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 export interface IUserLoginData {
   email: string;
   username: string;
@@ -22,11 +29,9 @@ export interface IAuthError {
 }
 
 export interface Headers {
-  normalizedNames: NormalizedNames;
+  normalizedNames: any;
   lazyUpdate: any;
 }
-
-export interface NormalizedNames {}
 
 export interface Error {
   message: string;
