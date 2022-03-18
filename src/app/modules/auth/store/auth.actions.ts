@@ -1,8 +1,7 @@
 import { Action } from '@ngrx/store';
 import {
   IAuthError,
-  IUserAuthorized,
-  IUserLoginCredentionals,
+  IUserLoginData,
   IUserRegistrated,
 } from 'src/app/classes/auth.interface';
 
@@ -26,7 +25,7 @@ export class Login implements Action {
 
 export class LoginSuccess implements Action {
   public readonly type = EAuthActions.LOGIN_SUCCESS;
-  constructor(public payload: IUserAuthorized) {}
+  constructor(public payload: IUserLoginData) {}
 }
 
 export class LoginFailure implements Action {

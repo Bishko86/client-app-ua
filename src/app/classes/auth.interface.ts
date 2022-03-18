@@ -1,9 +1,5 @@
-export interface IUserLoginCredentionals {
-  username: string;
-  password: string;
-}
-
-export interface IUserAuthorized {
+export interface IUserLoginData {
+  email: string;
   username: string;
   accessToken: string;
   roles: string[];

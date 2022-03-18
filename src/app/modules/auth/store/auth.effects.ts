@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { IAuthError, IUserAuthorized } from 'src/app/classes/auth.interface';
+import { IAuthError, IUserLoginData } from 'src/app/classes/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import {
   AuthIsFetching,
@@ -31,7 +31,7 @@ export class AuthEffects {
       switchMap(({ username, password }) => {
         this.store.dispatch(new AuthIsFetching(true));
         return this.authService.login(username, password).pipe(
-          map((req: IUserAuthorized) => {
+          map((req: IUserLoginData) => {
             this.store.dispatch(new AuthIsFetching(false));
             return new LoginSuccess(req);
           }),

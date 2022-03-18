@@ -37,6 +37,7 @@ export const authReducer = (
         ...state,
         isLoggedIn: false,
         userAuthData: {
+          email: '',
           accessToken: '',
           username: '',
           roles: [],

@@ -1,9 +1,8 @@
-import { IAuthError } from 'src/app/classes/auth.interface';
-
+import { IAuthError, IUserLoginData } from 'src/app/classes/auth.interface';
 export interface IAuthState {
   isLoggedIn: boolean;
   isFetching: boolean;
-  userAuthData: IUserAuthData;
+  userAuthData: IUserLoginData;
   loginError: IAuthError | null;
   registrateError: IAuthError | null;
   registrateResult: {
@@ -12,18 +11,13 @@ export interface IAuthState {
   };
 }
 
-interface IUserAuthData {
-  accessToken: string;
-  username: string;
-  roles: string[];
-}
-
 export const initialAuthState: IAuthState = {
   isLoggedIn: false,
   isFetching: false,
   userAuthData: {
     accessToken: '',
     username: '',
+    email: '',
     roles: [],
   },
   loginError: null,
