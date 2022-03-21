@@ -12,11 +12,11 @@ export interface IAuthState {
 }
 
 export const initialAuthState: IAuthState = {
-  isLoggedIn: false,
+  isLoggedIn: !!localStorage.getItem('isLoggedIn'),
   isFetching: false,
   userAuthData: {
-    accessToken: '',
-    username: '',
+    accessToken: localStorage.getItem('accessToken') || '',
+    username: localStorage.getItem('username') ||'',
     email: '',
     roles: [],
   },
