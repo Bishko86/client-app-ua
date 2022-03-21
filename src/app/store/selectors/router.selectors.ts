@@ -50,4 +50,4 @@ export const selectRouteNestedParams = createSelector(selectRouter, (state) => {
 export const selectRouteNestedParam = (param: string) =>
 createSelector(selectRouteNestedParams, (params) => params && params[param]);
 
-export const selectQueryId = selectRouteNestedParam('id');
+export const selectQueryToken = selectRouteNestedParam('token');

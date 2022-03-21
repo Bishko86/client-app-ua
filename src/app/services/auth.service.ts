@@ -24,6 +24,10 @@ export class AuthService {
       password,
     });
   }
+
+  verifyUser(token: string) {
+    return this.http.get<any>(`/auth/confirm/${token}`);
+  }
   
   saveUserToLocalStorage(user: IUserLoginData) {
     Object.entries(user).forEach(([key, value]) => {

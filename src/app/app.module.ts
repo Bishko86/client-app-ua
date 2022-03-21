@@ -23,13 +23,22 @@ import { HeaderComponent } from './components/header/header.component';
 import { AuthService } from './services/auth.service';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { AuthEffects } from './modules/auth/store/auth.effects';
+import { ConfirmEmailComponent } from './components/confirm-registrate/confirm-email.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 const appRoutes: Routes = [
-  { path: 'home', 
-  loadChildren: () => import('./modules/home/home.module').then((mod) => mod.HomeModule),
-},
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./modules/home/home.module').then((mod) => mod.HomeModule),
+  },
   { path: 'about-us', component: AboutUsComponent, pathMatch: 'full' },
   { path: 'users', component: UsersListComponent, pathMatch: 'full' },
+  {
+    path: 'confirm/:token',
+    component: ConfirmEmailComponent,
+    pathMatch: 'full',
+  },
   {
     path: 'users/:id',
     component: UserComponent,
@@ -40,9 +49,13 @@ const appRoutes: Routes = [
       baz: 789,
     },
   },
-  { path: 'photo',
-  loadChildren: () => import('./modules/gallery/gallery.module').then((mod) => mod.GalleryModule),
-},
+  {
+    path: 'photo',
+    loadChildren: () =>
+      import('./modules/gallery/gallery.module').then(
+        (mod) => mod.GalleryModule
+      ),
+  },
   { path: '**', redirectTo: '/home' },
 ];
 
@@ -53,6 +66,7 @@ const appRoutes: Routes = [
     UserComponent,
     AboutUsComponent,
     HeaderComponent,
+    ConfirmEmailComponent,
   ],
   imports: [
     MaterialModule,
@@ -65,15 +79,17 @@ const appRoutes: Routes = [
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
     BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
-    UserService,  
+    UserService,
     PhotoService,
-    AuthService, {
-      provide: HTTP_INTERCEPTORS, 
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })
