@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
@@ -8,7 +9,7 @@ import { IAppState } from 'src/app/store/states/app.state';
 interface IConfirmResult {
   status: boolean;
   title: string;
-  text: string;
+  message: string;
 }
 
 @Component({
@@ -17,17 +18,14 @@ interface IConfirmResult {
   styleUrls: ['./confirm-email.component.css'],
 })
 export class ConfirmEmailComponent implements OnInit {
-  confirmResult: IConfirmResult = {
-    status: true,
-    title: 'Email successfully verified',
-    text: 'Please wait...',
-  };
+  confirmResult: IConfirmResult;
 
   private confirmToken$ = this.store.pipe(select(selectQueryToken));
 
   constructor(
     private store: Store<IAppState>,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -35,18 +33,28 @@ export class ConfirmEmailComponent implements OnInit {
       this.authService
         .verifyUser(token)
         .pipe(take(5))
-        .subscribe((data) => {
-          this.confirmResult = {
-            status: data.status,
-            title: data.title,
-            text: data.text,
-          };
-        });
+        .subscribe(
+          (data) => {
+            this.confirmResult = {
+              status: data.status,
+              title: data.title,
+              message: data.message,
+            };
+          },
+          (err) => {
+            this.confirmResult = {
+              status: false,
+              title: 'Confirm email is failed',
+              message: err.error.message,
+            };
+          }
+        );
     });
   }
 
   onToLoginPage(): void {
     console.log('Login Page');
+    
   }
 
   toWelcomePage() {
