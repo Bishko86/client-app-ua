@@ -43,7 +43,6 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.passError$
       .pipe(takeUntil(this.destroy$))
       .subscribe((error) => {
-        console.log('Login');
         this.loginError = error});
   }
 

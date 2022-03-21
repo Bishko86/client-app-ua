@@ -1,11 +1,13 @@
 <div class="confirm-page">
-  <h1>{{ confirmResult.title }}</h1>
-  <p class="info">{{ confirmResult.text }}</p>
-  <div class="success-confirm" *ngIf="confirmResult.status; else confirmFailure">
-    <h2>Go to login?</h2>
-    <div>
-      <button class="log_btn"(click)="onToLoginPage()">Yes</button>
-      <button class="log_btn" (click)="toWelcomePage()">No</button>
+  <div *ngIf="confirmResult; else confirmFailure">
+    <h1>{{ confirmResult.title }}</h1>
+    <p class="info">{{ confirmResult.message }}</p>
+    <div class="success-confirm" *ngIf="confirmResult.status">
+      <h2>Go to login?</h2>
+      <div>
+        <button class="log_btn" (click)="onToLoginPage()">Yes</button>
+        <button class="log_btn" (click)="toWelcomePage()">No</button>
+      </div>
     </div>
   </div>
   <ng-template #confirmFailure>
