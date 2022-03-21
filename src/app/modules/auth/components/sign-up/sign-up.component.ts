@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IAuthError } from 'src/app/classes/auth.interface';
+import { IAuthError } from 'src/app/modules/auth/store/auth.interface';
 import {
   EraseRegistrateError,
   Registration,
@@ -49,6 +49,7 @@ export class SignUpComponent implements OnInit {
 
   private initForm() {
     this.signUpForm = new FormGroup({
+      username: new FormControl('', Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
@@ -64,9 +65,9 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    const { email, password, confirmPassword } = this.signUpForm.value;
-    if (password === confirmPassword) {
-      this.store.dispatch(new Registration(email, password));
+    const registrateData = { ...this.signUpForm.value };
+    if (registrateData.password === registrateData.confirmPassword) {
+      this.store.dispatch(new Registration(registrateData));
       this.registrateResult$
         .pipe(takeUntil(this.destroy$))
         .subscribe((result) => {
