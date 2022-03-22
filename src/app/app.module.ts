@@ -23,7 +23,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { AuthService } from './services/auth.service';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { AuthEffects } from './modules/auth/store/auth.effects';
-import { ConfirmEmailComponent } from './components/confirm-registrate/confirm-email.component';
 import { SharedModule } from './modules/shared/shared.module';
 
 const appRoutes: Routes = [
@@ -34,11 +33,6 @@ const appRoutes: Routes = [
   },
   { path: 'about-us', component: AboutUsComponent, pathMatch: 'full' },
   { path: 'users', component: UsersListComponent, pathMatch: 'full' },
-  {
-    path: 'confirm/:token',
-    component: ConfirmEmailComponent,
-    pathMatch: 'full',
-  },
   {
     path: 'users/:id',
     component: UserComponent,
@@ -66,7 +60,6 @@ const appRoutes: Routes = [
     UserComponent,
     AboutUsComponent,
     HeaderComponent,
-    ConfirmEmailComponent,
   ],
   imports: [
     MaterialModule,

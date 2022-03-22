@@ -9,14 +9,14 @@
     </ul>
   </nav>
 
-  <ng-container [ngSwitch]="isLoggedIn">
+  <ng-container [ngSwitch]="isLoggedIn$ | async">
     <div *ngSwitchCase="false" class="auth-tool">
       <a (click)="openAuthModal('sign-in')" role="link">Sign in</a>
       <a (click)="openAuthModal('sign-up')">Sign up</a>
     </div>
     <div *ngSwitchCase="true">
       <a class="header-username" (click)="toggleDropdown()">
-        <span class="username">{{ userName }}</span>
+        <span class="username">{{ (userData$ | async)?.username }}</span>
         <span class="arrow-down" [class.arrow-up]="dropdownVisible">></span>
       </a>
       <ul *ngIf="dropdownVisible" class="dropdown-menu">

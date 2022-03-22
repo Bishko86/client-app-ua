@@ -53,8 +53,7 @@ export class ConfirmEmailComponent implements OnInit {
   }
 
   onToLoginPage(): void {
-    console.log('Login Page');
-    
+    this.router.navigateByUrl('login');
   }
 
   toWelcomePage() {
