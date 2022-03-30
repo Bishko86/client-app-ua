@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new GetUsers());
+    // this.store.dispatch(new GetUsers());
   }
 
   navigate(event: Event) {

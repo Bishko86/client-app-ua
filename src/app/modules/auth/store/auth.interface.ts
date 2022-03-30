@@ -10,6 +10,8 @@ export interface IUserLoginData {
   username: string;
   accessToken: string;
   roles: string[];
+  id: string;
+  status: string;
 }
 
 export interface IUserRegistrated {

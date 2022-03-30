@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { ITokenPair } from '../common/interfaces/auth.interface';
 import { AuthModalComponent } from '../modules/auth/components/auth-modal/auth-modal.component';
 import {
   IUserLoginCredentials,
@@ -18,7 +19,7 @@ export class AuthService {
     username,
     email,
     password,
-  }: IUserLoginCredentials): Observable<IUserLoginData> {
+  }: IUserLoginCredentials): Observable<any> {
     return this.http.post<IUserLoginData>('/auth/login', {
       username,
       email,
@@ -55,5 +56,9 @@ export class AuthService {
       },
       autoFocus: false,
     });
+  }
+
+  refresh(refreshToken: string): Observable<ITokenPair> {
+    return this.http.get<ITokenPair>('/auth/refresh/'+ refreshToken);
   }
 }

@@ -41,6 +41,8 @@ export const authReducer = (
           accessToken: '',
           username: '',
           roles: [],
+          id: '',
+          status: '',
         },
       };
     case EAuthActions.ERASE_LOGIN_ERROR:

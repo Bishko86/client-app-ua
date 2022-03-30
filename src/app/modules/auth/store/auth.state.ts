@@ -19,6 +19,8 @@ export const initialAuthState: IAuthState = {
     username: localStorage.getItem('username') ||'',
     email: '',
     roles: [],
+    id: '',
+    status: '',
   },
   loginError: null,
   registrateError: null,
