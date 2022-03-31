@@ -20,7 +20,7 @@ import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['../sign-in/sign-in.component.css'],
+  styleUrls: ['../sign-in/sign-in.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;

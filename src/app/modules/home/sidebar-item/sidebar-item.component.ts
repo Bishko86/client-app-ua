@@ -9,7 +9,7 @@ import { IAppState } from 'src/app/store/states/app.state';
 @Component({
   selector: 'app-sidebar-item',
   templateUrl: './sidebar-item.component.html',
-  styleUrls: ['./sidebar-item.component.css'],
+  styleUrls: ['./sidebar-item.component.scss'],
 })
 export class SidebarItemComponent implements OnInit, OnDestroy {
   @Input() sidebarItem: string;

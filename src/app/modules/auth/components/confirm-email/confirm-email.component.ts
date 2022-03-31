@@ -2,23 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
+import { IVerifyUserDto } from 'src/app/common/interfaces/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { selectQueryToken } from 'src/app/store/selectors/router.selectors';
 import { IAppState } from 'src/app/store/states/app.state';
 
-interface IConfirmResult {
-  status: boolean;
-  title: string;
-  message: string;
-}
-
 @Component({
   selector: 'app-confirm-email',
   templateUrl: './confirm-email.component.html',
-  styleUrls: ['./confirm-email.component.css'],
+  styleUrls: ['./confirm-email.component.scss'],
 })
 export class ConfirmEmailComponent implements OnInit {
-  confirmResult: IConfirmResult;
+  confirmResult: IVerifyUserDto;
 
   private confirmToken$ = this.store.pipe(select(selectQueryToken));
 
@@ -43,7 +38,7 @@ export class ConfirmEmailComponent implements OnInit {
           },
           (err) => {
             this.confirmResult = {
-              status: false,
+              status: '',
               title: 'Confirm email is failed',
               message: err.error.message,
             };

@@ -17,7 +17,7 @@ import { IAppState } from 'src/app/store/states/app.state';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css'],
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
   user$ = this._store.pipe(select(selectSelectedUser));
