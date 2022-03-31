@@ -3,14 +3,6 @@
   <p>Please, enter your details to sidn in</p>
   <div class="close-modal" (click)="closeModal()">&#10006;</div>
   <form class="sign-in" [formGroup]="signInForm" (ngSubmit)="signIn()">
-    <!-- <label for="username">User name</label>
-    <input
-      type="text"
-      id="usermane"
-      formControlName="username"
-      placeholder="User name"
-    />
-    <div class="message"></div> -->
     <label for="email">Email</label>
     <input
       type="email"
