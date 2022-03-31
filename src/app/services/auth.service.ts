@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ITokenPair } from '../common/interfaces/auth.interface';
+import { ITokenPair, IVerifyUserDto } from '../common/interfaces/auth.interface';
 import { AuthModalComponent } from '../modules/auth/components/auth-modal/auth-modal.component';
 import {
   IUserLoginCredentials,
   IUserLoginData,
+  IUserRegistrated,
 } from '../modules/auth/store/auth.interface';
 
 @Injectable({
@@ -31,16 +32,16 @@ export class AuthService {
     username,
     email,
     password,
-  }: IUserLoginCredentials): Observable<any> {
-    return this.http.post<any>('/auth/registration', {
+  }: IUserLoginCredentials): Observable<IUserRegistrated> {
+    return this.http.post<IUserRegistrated>('/auth/registration', {
       username,
       email,
       password,
     });
   }
 
-  verifyUser(token: string) {
-    return this.http.get<any>(`/auth/confirm/${token}`);
+  verifyUser(token: string): Observable<IVerifyUserDto> {
+    return this.http.get<IVerifyUserDto>(`/auth/confirm/${token}`);
   }
 
   saveUserToLocalStorage(user: IUserLoginData) {

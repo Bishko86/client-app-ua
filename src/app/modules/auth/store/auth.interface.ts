@@ -9,6 +9,7 @@ export interface IUserLoginData {
   email: string;
   username: string;
   accessToken: string;
+  refreshToken: string; 
   roles: string[];
   id: string;
   status: string;

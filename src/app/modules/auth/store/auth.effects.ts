@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { IAuthError, IUserLoginData } from 'src/app/modules/auth/store/auth.interface';
+import { IAuthError } from 'src/app/modules/auth/store/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import {
   AuthIsFetching,
@@ -24,7 +24,7 @@ export class AuthEffects {
     private authService: AuthService,
     private actions$: Actions,
     private store: Store<IAppState>,
-    private cookieService: CookieService,
+    private cookieService: CookieService
   ) {}
 
   login$ = createEffect(() => {
@@ -35,7 +35,7 @@ export class AuthEffects {
         return this.authService.login(action.payload).pipe(
           map((req) => {
             this.store.dispatch(new AuthIsFetching(false));
-            this.cookieService.set('refreshToken',req.refreshToken);
+            this.cookieService.set('refreshToken', req.refreshToken);
             return new LoginSuccess(req);
           }),
           catchError((err: IAuthError) => {
@@ -55,10 +55,7 @@ export class AuthEffects {
         return this.authService.registration(action.payload).pipe(
           map((req) => {
             this.store.dispatch(new AuthIsFetching(false));
-            return new RegistrationSuccess({
-              ...req,
-              registrateIsSuccess: true,
-            });
+            return new RegistrationSuccess(req);
           }),
           catchError((err: IAuthError) => {
             this.store.dispatch(new AuthIsFetching(false));

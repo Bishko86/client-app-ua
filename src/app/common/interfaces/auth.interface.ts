@@ -7,7 +7,14 @@ export interface IAuthDialogData {
 export interface IUserAuth extends IUserLoginData {
   isLoggedIn: boolean;
 }
+
 export interface ITokenPair {
   accessToken: string;
   refreshToken: string;
+}
+
+export interface IVerifyUserDto {
+  status: string;
+  title: string;
+  message: string;
 }

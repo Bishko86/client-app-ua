@@ -39,6 +39,7 @@ export const authReducer = (
         userAuthData: {
           email: '',
           accessToken: '',
+          refreshToken: '',
           username: '',
           roles: [],
           id: '',
