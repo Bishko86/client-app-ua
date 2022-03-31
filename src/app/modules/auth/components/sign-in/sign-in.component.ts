@@ -35,7 +35,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   constructor(
     private dialogRef: MatDialogRef<AuthModalComponent>,
     private authService: AuthService,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +52,6 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   private initForm() {
     this.signInForm = new FormGroup({
-      username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });

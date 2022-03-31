@@ -1,9 +1,20 @@
-import { IUserLoginData } from "src/app/modules/auth/store/auth.interface";
+import { IUserLoginData } from 'src/app/modules/auth/store/auth.interface';
 
 export interface IAuthDialogData {
-    page: 'sign-in' | 'sign-up';
-  }
+  page: 'sign-in' | 'sign-up';
+}
 
-  export interface IUserAuth extends IUserLoginData {
-    isLoggedIn: boolean;
-  }
+export interface IUserAuth extends IUserLoginData {
+  isLoggedIn: boolean;
+}
+
+export interface ITokenPair {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface IVerifyUserDto {
+  status: string;
+  title: string;
+  message: string;
+}
