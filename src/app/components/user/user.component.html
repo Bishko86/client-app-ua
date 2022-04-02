@@ -3,7 +3,7 @@
     user: user$ | async
   } as obs"
 >
-  <div [ngClass]="obs.user ? 'styleName' : 'noName'">
+  <div [ngClass]="obs.user ? 'style-name' : 'no-name'">
     {{ obs.user ? obs.user.name : "No data" }}
   </div>
   <ul *ngIf="obs.user">
