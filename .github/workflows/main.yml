@@ -32,5 +32,9 @@ jobs:
       - name: CSS Linter
         run: npm run stylelint
 
+      - name: Build
+        run: |
+          npx ng build --prod
+
         
 
