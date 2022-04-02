@@ -1,6 +1,7 @@
 .image {
   width: 150px;
 }
+
 .gallery {
   display: inline-block;
   margin: 10px;
@@ -12,7 +13,7 @@
   justify-items: center;
   column-gap: 50px;
   row-gap: 50px;
-  background-color: rgb(55, 56, 58);
+  background-color: rgb(55 56 58);
   padding: 40px 50px;
 }
 
@@ -25,6 +26,6 @@
   border-radius: 50%;
   transform: rotate(-90deg);
   font-size: 20px;
-  color: rgb(54, 52, 52);
+  color: rgb(54 52 52);
   border: 1px solid black;
 }
