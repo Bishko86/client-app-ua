@@ -3,11 +3,13 @@
   font-size: 24px;
   font-weight: 600;
 }
+
 nav .menu {
   list-style: none;
   display: flex;
   margin-left: 160px;
 }
+
 .menu-item {
   display: inline-block;
   padding: 5px;
@@ -17,40 +19,48 @@ nav .menu {
   color: rgb(63, 62, 62);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
 .wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 12px;
 }
+
 .auth-tool {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 200px;
 }
+
 .auth-tool a {
   cursor: pointer;
 }
+
 .header-username {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
+
 .username {
   margin-right: 5px;
   color: green;
 }
+
 .arrow-down {
   transform: rotate(90deg);
   transition: 0.4s ease-out;
   transition-delay: 0.1s;
 }
+
 .arrow-up {
   transform: rotate(-90deg);
   transition: 0.4s ease-out;
   transition-delay: 0;
 }
+
 .dropdown-menu {
   list-style: none;
   position: absolute;
@@ -63,6 +73,7 @@ nav .menu {
   justify-content: center;
   text-align: center;
 }
+
 .dropdown-menu li {
   padding: 5px 10px 15px;
 }
