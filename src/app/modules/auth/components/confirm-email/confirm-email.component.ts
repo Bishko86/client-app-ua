@@ -48,7 +48,7 @@ export class ConfirmEmailComponent implements OnInit {
   }
 
   onToLoginPage(): void {
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('auth/login');
   }
 
   toWelcomePage() {
