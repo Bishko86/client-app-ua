@@ -59,7 +59,7 @@ export class AuthService {
     });
   }
 
-  refresh(refreshToken: string): Observable<ITokenPair> {
-    return this.http.get<ITokenPair>('/auth/refresh/'+ refreshToken);
+  refresh(): Observable<ITokenPair> {
+    return this.http.get<ITokenPair>('/auth/refresh/');
   }
 }

@@ -16,15 +16,12 @@ import {
   RegistrationSuccess,
 } from './auth.actions';
 import { IAppState } from '../../../store/states/app.state';
-import { CookieService } from 'ngx-cookie-service';
-
 @Injectable()
 export class AuthEffects {
   constructor(
     private authService: AuthService,
     private actions$: Actions,
     private store: Store<IAppState>,
-    private cookieService: CookieService
   ) {}
 
   login$ = createEffect(() => {
@@ -35,7 +32,6 @@ export class AuthEffects {
         return this.authService.login(action.payload).pipe(
           map((req) => {
             this.store.dispatch(new AuthIsFetching(false));
-            this.cookieService.set('refreshToken', req.refreshToken);
             return new LoginSuccess(req);
           }),
           catchError((err: IAuthError) => {

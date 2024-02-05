@@ -65,7 +65,7 @@ const appRoutes: Routes = [
     MaterialModule,
     BrowserModule,
     HttpClientModule,
-    AuthModule,
+    AuthModule, //TODO import with lazy loading
     RouterModule.forRoot(appRoutes),
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([PhotoEffects, UserEffects, AuthEffects]),
@@ -86,4 +86,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

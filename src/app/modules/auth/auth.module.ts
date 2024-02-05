@@ -19,22 +19,21 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [
-    SignInComponent,
-    SignUpComponent,
-    AuthModalComponent,
-    ShowPasswordDirective,
-    ConfirmEmailComponent,
-    AuthComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(routes),
-    SharedModule,
-  ],
-  exports: [RouterModule],
-  entryComponents: [AuthModalComponent],
+    declarations: [
+        SignInComponent,
+        SignUpComponent,
+        AuthModalComponent,
+        ShowPasswordDirective,
+        ConfirmEmailComponent,
+        AuthComponent,
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(routes),
+        SharedModule,
+    ],
+    exports: [RouterModule]
 })
 export class AuthModule {}
