@@ -1,0 +1,11 @@
+.confirm {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__dialog {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+  }
+}

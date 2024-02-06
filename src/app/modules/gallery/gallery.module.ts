@@ -5,7 +5,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes:Routes = [
+const routes: Routes = [
   {path: '', component: GalleryComponent}
 ]
 
