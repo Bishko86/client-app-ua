@@ -21,26 +21,35 @@ export class PeopleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.peopleApiService.fetchPeople().subscribe((people) => {
-      this.people = people;
-      this.cdr.markForCheck();
-    });
+    this.peopleApiService.fetchPeople()
+      .pipe(take(1)).subscribe((people) => {
+        this.people = people;
+        this.cdr.markForCheck();
+      });
   }
 
   addPerson(): void {
     if (this.peopleForm.valid) {
-    const person = this.peopleForm.getRawValue();
-  
-    this.peopleApiService.addNewPerson(person)
-      .pipe(
-        switchMap(() => this.peopleApiService.fetchPeople()),
-        take(1)
-      ).subscribe((people) => {
-        this.people = people;
-        this.cdr.markForCheck();
-      });
+      const person = this.peopleForm.getRawValue();
+
+      this.peopleApiService.addNewPerson(person)
+        .pipe(
+          switchMap(() => this.peopleApiService.fetchPeople()),
+          take(1)
+        ).subscribe((people) => {
+          this.people = people;
+          this.cdr.markForCheck();
+        });
     } else {
       this.peopleForm.markAllAsTouched();
     }
+  }
+
+  refreshGrid(): void {
+    this.peopleApiService.fetchPeople()
+      .pipe(take(1)).subscribe((people) => {
+        this.people = people;
+        this.cdr.markForCheck();
+      });
   }
 }
