@@ -24,12 +24,19 @@ import { AuthService } from './services/auth.service';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { AuthEffects } from './modules/auth/store/auth.effects';
 import { SharedModule } from './modules/shared/shared.module';
+import { ConfirmComponent } from './common/components/confirm/confirm.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const appRoutes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
       import('./modules/home/home.module').then((mod) => mod.HomeModule),
+  },
+  {
+    path: 'people',
+    loadChildren: () =>
+      import('./modules/people/people.module').then((mod) => mod.PeopleModule),
   },
   { path: 'about-us', component: AboutUsComponent, pathMatch: 'full' },
   { path: 'users', component: UsersListComponent, pathMatch: 'full' },
@@ -60,6 +67,7 @@ const appRoutes: Routes = [
     UserComponent,
     AboutUsComponent,
     HeaderComponent,
+    ConfirmComponent
   ],
   imports: [
     MaterialModule,
@@ -73,6 +81,7 @@ const appRoutes: Routes = [
     StoreDevtoolsModule.instrument(),
     BrowserAnimationsModule,
     SharedModule,
+    MatButtonModule
   ],
   providers: [
     UserService,
