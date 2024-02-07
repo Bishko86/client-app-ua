@@ -18,8 +18,8 @@ import { Logout } from '../modules/auth/store/auth.actions';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   private apiUrl = environment.production
-    ? 'http://192.168.0.140:8080'
-    : 'http://localhost:8080';
+    ? 'http://16.170.243.193:8080'
+    : 'http://16.170.243.193:8080';
 
   private isRefreshing = false;
 
